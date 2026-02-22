@@ -35,6 +35,7 @@ This system is **production-ready**, secure, and fully modular.
 
 ## 🏗 Folder Structure
 
+RIHAN-X-LIVEE/ │ ├── frontend/ │   ├── index.html │   ├── login.html │   ├── admin.html │   ├── manifest.json │   ├── sw.js │   ├── css/ │   │   └── style.css │   └── js/ │       ├── firebase.js │       ├── auth.js │       ├── youtube.js │       ├── tournament.js │       └── admin.js │ ├── backend/ │   ├── server.js │   ├── package.json │   ├── .env │   └── .gitignore │ └── README.md
 
 ---
 
@@ -54,4 +55,13 @@ This system is **production-ready**, secure, and fully modular.
 1. Go to `backend/`
 2. Install dependencies:
 ```bash
+
+
 npm install
+YOUTUBE_API_KEY=YOUR_PRIVATE_KEY
+CHANNEL_ID=UCw838b6jU39JdlmAa7pUBUQ
+PORT=5000
+
+node server.js
+
+http://localhost:5000/api/youtube
