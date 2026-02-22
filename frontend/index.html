@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIHAN X LIVEE</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+</head>
+<body>
 
+<div id="tsparticles"></div>
+
+<h1>🔥 RIHAN X LIVEE 🔥</h1>
+<p>Official Gaming Empire</p>
+
+<div class="card">
+<h2>Subscribers</h2>
+<p id="subs">Loading...</p>
+</div>
+
+<div class="card">
+<h2>Views</h2>
+<p id="views">Loading...</p>
+</div>
+
+<a href="login.html"><button>Login</button></a>
+<a href="admin.html"><button>Admin</button></a>
+
+<script src="js/youtube.js"></script>
+<script>
+tsParticles.load("tsparticles",{
+  particles:{
+    number:{value:80},
+    color:{value:"#ff0000"},
+    move:{speed:2},
+    size:{value:3}
+  }
+});
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+</body>
+</html>

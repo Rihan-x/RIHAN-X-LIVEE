@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - RIHAN X LIVEE</title>
 
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:'Orbitron',sans-serif;
+  text-align:center;
+}
+h1{
+  color:red;
+  text-shadow:0 0 20px red;
+  margin-top:30px;
+}
+.form-box{
+  max-width:400px;
+  margin:50px auto;
+  padding:30px;
+  border:2px solid red;
+  border-radius:15px;
+  box-shadow:0 0 20px red;
+}
+input{
+  width:90%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+}
+button{
+  padding:10px 20px;
+  border:2px solid red;
+  background:black;
+  color:red;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
+}
+button:hover{
+  background:red;
+  color:black;
+}
+p{
+  margin-top:15px;
+}
+a{
+  color:red;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔐 Login - RIHAN X LIVEE</h1>
+
+<div class="form-box">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <br>
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+  <p id="msg"></p>
+</div>
+
+<script type="module">
+import { auth, db } from "./js/firebase.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* =========================
+   REGISTER
+========================= */
+window.register = async function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const msg = document.getElementById("msg");
+
+  if(!email || !password){ msg.innerText="⚠ Fill all fields"; return; }
+
+  try{
+    const userCred = await createUserWithEmailAndPassword(auth,email,password);
+    await setDoc(doc(db,"users",userCred.user.uid),{
+      email:email,
+      role:"USER"
+    });
+    msg.style.color="lime";
+    msg.innerText="✅ Registered Successfully!";
+  }catch(err){
+    msg.style.color="red";
+    msg.innerText=err.message;
+  }
+}
+
+/* =========================
+   LOGIN
+========================= */
+window.login = async function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const msg = document.getElementById("msg");
+
+  if(!email || !password){ msg.innerText="⚠ Fill all fields"; return; }
+
+  try{
+    await signInWithEmailAndPassword(auth,email,password);
+    msg.style.color="lime";
+    msg.innerText="✅ Login Successful!";
+    window.location.href="index.html";
+  }catch(err){
+    msg.style.color="red";
+    msg.innerText=err.message;
+  }
+}
+</script>
+
+</body>
+</html>
